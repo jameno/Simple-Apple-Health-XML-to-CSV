@@ -20,7 +20,7 @@ If you get a _**ModuleNotFoundError: No module named 'pandas'**_ error, install 
 
    Go to your health home screen and click on the profile icon
 
-<img style="float: left;" src="health_home.PNG" width=300>
+<img style="float: left;" src="health_home.jpg" width=300>
 
 On the next page, click the "Export Health Data" button
 
@@ -28,19 +28,29 @@ On the next page, click the "Export Health Data" button
 
 Your data will be prepared, and then you can transfer the export.zip file to your machine.
 
+
+
 ### 3. Unzip the file, which should contain:
 
    * apple_health_export
      * export.xml
+     
      * export_cda.xml
+     
+       
 
-### 4. Place the **apple_health_xml_convert.py** into the folder alongside the files
+### 4. Place the **apple_health_xml_convert.py** into the folder alongside the files and run the script
 
-### 5. Run the script with `python apple_health_xml_convert.py`
+`python apple_health_xml_convert.py`
 
-   
+
 
 The export will be written with the format:
 
 * **apple_health_export_YYYY-MM-DD.csv**
 
+  
+
+In Excel, the output should look something like this:
+
+<img style="float: left;" src="example_output.jpg">
