@@ -20,11 +20,11 @@ If you get a _**ModuleNotFoundError: No module named 'pandas'**_ error, install 
 
    Go to your health home screen and click on the profile icon
 
-<img style="float: left;" src="health_home.jpg" width=300>
+<img style="float: left;" src="img/health_home.jpg" width=300>
 
 On the next page, click the "Export Health Data" button
 
-<img style="float: left;" src="export_data_button.jpg" width = 300 >
+<img style="float: left;" src="img/export_data_button.jpg" width = 300 >
 
 Your data will be prepared, and then you can transfer the export.zip file to your machine.
 
@@ -53,4 +53,4 @@ The export will be written with the format:
 
 In Excel, the output should look something like this:
 
-<img style="float: left;" src="example_output.jpg">
+<img style="float: left;" src="img/example_output.jpg">
