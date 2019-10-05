@@ -74,7 +74,7 @@ def convert_xml():
     health_df = health_df.reindex(labels=reordered_cols, axis='columns')
 
     # Sort by newest data first
-    health_df.sort_values(by='creationDate', ascending=False, inplace=True)
+    health_df.sort_values(by='startDate', ascending=False, inplace=True)
 
     print("done!")
 
