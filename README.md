@@ -39,7 +39,7 @@ Your data will be prepared, and then you can transfer the export.zip file to you
      
        
 
-### 4. Place the **apple_health_xml_convert.py** into the folder alongside the files and run the script
+### 4. Place the "apple_health_xml_convert.py" file into the folder alongside the files and run the script
 
 `python apple_health_xml_convert.py`
 
