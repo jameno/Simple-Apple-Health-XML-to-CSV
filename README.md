@@ -4,9 +4,9 @@ A simple script to convert Apple Health's export.xml file to an easy to use csv.
 
 
 
-## How to Run
+## How to Run 
 
-1. ####Verify you have pandas installed on your machine or environment
+### 1. Verify you have pandas installed on your machine or environment
 
 `python -c "import pandas"` should return blank from the command line
 
@@ -16,7 +16,7 @@ If you get a _**ModuleNotFoundError: No module named 'pandas'**_ error, install 
 
 
 
-2. ####Export your Apple Health Data
+### 2. Export your Apple Health Data
 
    Go to your health home screen and click on the profile icon
 
@@ -28,15 +28,15 @@ On the next page, click the "Export Health Data" button
 
 Your data will be prepared, and then you can transfer the export.zip file to your machine.
 
-3. Unzip the file, which should contain:
+### 3. Unzip the file, which should contain:
 
    * apple_health_export
      * export.xml
      * export_cda.xml
 
-4. Place the **apple_health_xml_convert.py** into the folder alongside the files
+### 4. Place the **apple_health_xml_convert.py** into the folder alongside the files
 
-5. Run the script with `python apple_health_xml_convert.py`
+### 5. Run the script with `python apple_health_xml_convert.py`
 
    
 
