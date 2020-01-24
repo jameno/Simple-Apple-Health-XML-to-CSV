@@ -48,7 +48,13 @@ def convert_xml():
     attribute_list = []
 
     for child in etree.getroot():
-        attribute_list.append(child.attrib)
+        child_attrib = child.attrib
+        for metadata_entry in list(child):
+            metadata_values = list(metadata_entry.attrib.values())
+            metadata_dict = {metadata_values[0] : metadata_values[1]}
+            child_attrib.update(metadata_dict)
+
+        attribute_list.append(child_attrib)
 
     health_df = pd.DataFrame(attribute_list)
 
@@ -68,6 +74,16 @@ def convert_xml():
                     'startDate',
                     'endDate',
                     'creationDate']
+
+    # Add loop specific column ordering if metadata entries exist
+    if 'com.loopkit.InsulinKit.MetadataKeyProgrammedTempBasalRate' in original_cols:
+        shifted_cols.append('com.loopkit.InsulinKit.MetadataKeyProgrammedTempBasalRate')
+
+    if 'com.loopkit.InsulinKit.MetadataKeyScheduledBasalRate' in original_cols:
+        shifted_cols.append('com.loopkit.InsulinKit.MetadataKeyScheduledBasalRate')
+
+    if 'com.loudnate.CarbKit.HKMetadataKey.AbsorptionTimeMinutes' in original_cols:
+        shifted_cols.append('com.loudnate.CarbKit.HKMetadataKey.AbsorptionTimeMinutes')
 
     remaining_cols = list(set(original_cols) - set(shifted_cols))
     reordered_cols = shifted_cols + remaining_cols
