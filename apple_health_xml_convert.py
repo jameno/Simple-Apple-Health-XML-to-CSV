@@ -51,8 +51,9 @@ def convert_xml():
         child_attrib = child.attrib
         for metadata_entry in list(child):
             metadata_values = list(metadata_entry.attrib.values())
-            metadata_dict = {metadata_values[0] : metadata_values[1]}
-            child_attrib.update(metadata_dict)
+            if len(metadata_values) == 2:
+                metadata_dict = {metadata_values[0]: metadata_values[1]}
+                child_attrib.update(metadata_dict)
 
         attribute_list.append(child_attrib)
 
