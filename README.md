@@ -12,11 +12,11 @@ A simple script to convert Apple Health's export.xml file to an easy to use csv.
 
 If you have Python 2.x.x, please upgrade to Python 3 here: https://www.python.org/downloads/ (or specify your environment's Python version)
 
-`python -c "import pandas"` should return blank from the command line
+`python3 -c "import pandas"` should return blank from the command line
 
 If you get a _**ModuleNotFoundError: No module named 'pandas'**_ error, install pandas and try again:
 
-`pip install pandas`
+`pip3 install pandas`
 
 
 ### 2. Export your Apple Health Data
@@ -44,7 +44,7 @@ Your data will be prepared, and then you can transfer the export.zip file to you
 
 ### 4. Place the "apple_health_xml_convert.py" file from this repo into the folder alongside the files and run the script
 
-`python apple_health_xml_convert.py`
+`python3 apple_health_xml_convert.py`
 
 
 
