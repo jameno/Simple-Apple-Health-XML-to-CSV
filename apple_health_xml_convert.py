@@ -16,34 +16,53 @@ Simple Apple Health XML to CSV
 import pandas as pd
 import xml.etree.ElementTree as ET
 import datetime as dt
+import re
+import sys
 
 
 # %% Function Definitions
-def pre_process():
-    """Pre-processes the XML file by replacing specific bits that would
-    normally result in a ParseError
+
+def pre_process(xml_string):
+    """
+    The export.xml file is where all your data is, but Apple Health Export has
+    two main problems that make it difficult to parse: 
+        1. The DTD markup syntax is exported incorrectly by Apple Health for some data types.
+        2. The invisible character \x0b (sometimes rendered as U+000b) likes to destroy trees. Think of the trees!
+
+    Knowing this, we can save the trees and pre-processes the XML data to avoid destruction and ParseErrors.
     """
 
     print("Pre-processing...", end="")
-    with open("export.xml") as f:
-        newText = f.read().replace("\x0b", "")
+    sys.stdout.flush()
 
-    # with open("apple_health_export_2/new_export.xml", "w") as f:
-    with open("processed_export.xml", "w") as f:
-        f.write(newText)
-
+    xml_string = strip_dtd(xml_string)
+    xml_string = strip_invisible_character(xml_string)
     print("done!")
 
-    return
+    return xml_string
 
 
-def convert_xml():
+def strip_invisible_character(xml_string):
+
+    return xml_string.replace("\x0b", "")
+
+
+def strip_dtd(xml_string):
+    start_strip = re.search('<!DOCTYPE', xml_string).span()[0]
+    end_strip = re.search(']>', xml_string).span()[1]
+
+    return xml_string[:start_strip] + xml_string[end_strip:]
+
+
+def xml_to_csv(xml_string):
     """Loops through the element tree, retrieving all objects, and then
     combining them together into a dataframe
     """
 
-    print("Converting XML File...", end="")
-    etree = ET.parse("processed_export.xml")
+    print("Converting XML File to CSV...", end="")
+    sys.stdout.flush()
+
+    etree = ET.ElementTree(ET.fromstring(xml_string))
 
     attribute_list = []
 
@@ -78,13 +97,16 @@ def convert_xml():
 
     # Add loop specific column ordering if metadata entries exist
     if 'com.loopkit.InsulinKit.MetadataKeyProgrammedTempBasalRate' in original_cols:
-        shifted_cols.append('com.loopkit.InsulinKit.MetadataKeyProgrammedTempBasalRate')
+        shifted_cols.append(
+            'com.loopkit.InsulinKit.MetadataKeyProgrammedTempBasalRate')
 
     if 'com.loopkit.InsulinKit.MetadataKeyScheduledBasalRate' in original_cols:
-        shifted_cols.append('com.loopkit.InsulinKit.MetadataKeyScheduledBasalRate')
+        shifted_cols.append(
+            'com.loopkit.InsulinKit.MetadataKeyScheduledBasalRate')
 
     if 'com.loudnate.CarbKit.HKMetadataKey.AbsorptionTimeMinutes' in original_cols:
-        shifted_cols.append('com.loudnate.CarbKit.HKMetadataKey.AbsorptionTimeMinutes')
+        shifted_cols.append(
+            'com.loudnate.CarbKit.HKMetadataKey.AbsorptionTimeMinutes')
 
     remaining_cols = list(set(original_cols) - set(shifted_cols))
     reordered_cols = shifted_cols + remaining_cols
@@ -100,6 +122,8 @@ def convert_xml():
 
 def save_to_csv(health_df):
     print("Saving CSV file...", end="")
+    sys.stdout.flush()
+
     today = dt.datetime.now().strftime('%Y-%m-%d')
     health_df.to_csv("apple_health_export_" + today + ".csv", index=False)
     print("done!")
@@ -108,8 +132,9 @@ def save_to_csv(health_df):
 
 
 def main():
-    pre_process()
-    health_df = convert_xml()
+    xml_string = open("export.xml").read()
+    xml_string = pre_process(xml_string)
+    health_df = xml_to_csv(xml_string)
     save_to_csv(health_df)
 
     return
