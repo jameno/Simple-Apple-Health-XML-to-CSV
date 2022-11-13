@@ -21,8 +21,6 @@ If you get a _**ModuleNotFoundError: No module named 'pandas'**_ error, install 
 
 ### 2. Export your Apple Health Data
 
-   Go to your health home screen and click on the profile icon
-
 | Health Home | ➡️ | Export Data |
 |--|--|--|
 |<img style="float: left;" src="img/health_home.jpg" width=300>||<img style="float: left;" src="img/export_data_button.jpg" width = 300 >|
