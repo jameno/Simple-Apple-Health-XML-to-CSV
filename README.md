@@ -23,15 +23,11 @@ If you get a _**ModuleNotFoundError: No module named 'pandas'**_ error, install 
 
    Go to your health home screen and click on the profile icon
 
-<img style="float: left;" src="img/health_home.jpg" width=300>
-
-On the next page, click the "Export Health Data" button
-
-<img style="float: left;" src="img/export_data_button.jpg" width = 300 >
+| Health Home | ➡️ | Export Data |
+|--|--|--|
+|<img style="float: left;" src="img/health_home.jpg" width=300>||<img style="float: left;" src="img/export_data_button.jpg" width = 300 >|
 
 Your data will be prepared, and then you can transfer the export.zip file to your machine.
-
-
 
 ### 3. Unzip the file, which should contain:
 
