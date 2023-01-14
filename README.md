@@ -30,7 +30,7 @@ Your data will be prepared, and then you can transfer the export.zip file to you
 ### 3. Unzip the file, which should contain:
 
    * apple_health_export
-     * export.xml
+     * export.xml (This is the file with your data that you want to convert)
      
      * export_cda.xml
      
