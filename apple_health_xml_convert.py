@@ -18,9 +18,7 @@ import os
 import pandas as pd
 import xml.etree.ElementTree as ET
 import datetime as dt
-import re
 import sys
-from memory_profiler import profile
 
 
 # %% Function Definitions
@@ -141,7 +139,6 @@ def remove_temp_file(temp_file_path):
     
     return
 
-@profile
 def main():
     file_path = "export.xml"
     temp_file_path = preprocess_to_temp_file(file_path)
