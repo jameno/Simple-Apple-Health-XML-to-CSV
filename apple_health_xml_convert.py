@@ -5,24 +5,27 @@ Simple Apple Health XML to CSV
 ==============================
 :File: convert.py
 :Description: Convert Apple Health "export.xml" file into a csv
-:Version: 0.0.1
+:Version: 0.0.2
 :Created: 2019-10-04
+:Updated: 2023-10-29
 :Authors: Jason Meno (jam)
 :Dependencies: An export.xml file from Apple Health
 :License: BSD-2-Clause
 """
 
 # %% Imports
+import os
 import pandas as pd
 import xml.etree.ElementTree as ET
 import datetime as dt
 import re
 import sys
+from memory_profiler import profile
 
 
 # %% Function Definitions
 
-def pre_process(xml_string):
+def preprocess_to_temp_file(file_path):
     """
     The export.xml file is where all your data is, but Apple Health Export has
     two main problems that make it difficult to parse: 
@@ -32,29 +35,29 @@ def pre_process(xml_string):
     Knowing this, we can save the trees and pre-processes the XML data to avoid destruction and ParseErrors.
     """
 
-    print("Pre-processing...", end="")
+    print("Pre-processing and writing to temporary file...", end="")
     sys.stdout.flush()
 
-    xml_string = strip_dtd(xml_string)
-    xml_string = strip_invisible_character(xml_string)
+    temp_file_path = "temp_preprocessed_export.xml"
+    with open(file_path, 'r') as infile, open(temp_file_path, 'w') as outfile:
+        skip_dtd = False
+        for line in infile:
+            if '<!DOCTYPE' in line:
+                skip_dtd = True
+            if not skip_dtd:
+                line = strip_invisible_character(line)
+                outfile.write(line)
+            if ']>' in line:
+                skip_dtd = False
+
     print("done!")
+    return temp_file_path
 
-    return xml_string
-
-
-def strip_invisible_character(xml_string):
-
-    return xml_string.replace("\x0b", "")
+def strip_invisible_character(line):
+    return line.replace("\x0b", "")
 
 
-def strip_dtd(xml_string):
-    start_strip = re.search('<!DOCTYPE', xml_string).span()[0]
-    end_strip = re.search(']>', xml_string).span()[1]
-
-    return xml_string[:start_strip] + xml_string[end_strip:]
-
-
-def xml_to_csv(xml_string):
+def xml_to_csv(file_path):
     """Loops through the element tree, retrieving all objects, and then
     combining them together into a dataframe
     """
@@ -62,19 +65,20 @@ def xml_to_csv(xml_string):
     print("Converting XML File to CSV...", end="")
     sys.stdout.flush()
 
-    etree = ET.ElementTree(ET.fromstring(xml_string))
-
     attribute_list = []
 
-    for child in etree.getroot():
-        child_attrib = child.attrib
-        for metadata_entry in list(child):
-            metadata_values = list(metadata_entry.attrib.values())
-            if len(metadata_values) == 2:
-                metadata_dict = {metadata_values[0]: metadata_values[1]}
-                child_attrib.update(metadata_dict)
+    for event, elem in ET.iterparse(file_path, events=('end',)):
+        if event == 'end':
+            child_attrib = elem.attrib
+            for metadata_entry in list(elem):
+                metadata_values = list(metadata_entry.attrib.values())
+                if len(metadata_values) == 2:
+                    metadata_dict = {metadata_values[0]: metadata_values[1]}
+                    child_attrib.update(metadata_dict)
+            attribute_list.append(child_attrib)
 
-        attribute_list.append(child_attrib)
+            # Clear the element from memory to avoid excessive memory consumption
+            elem.clear()
 
     health_df = pd.DataFrame(attribute_list)
 
@@ -130,12 +134,20 @@ def save_to_csv(health_df):
 
     return
 
+def remove_temp_file(temp_file_path):
+    print("Removing temporary file...", end="")
+    os.remove(temp_file_path)
+    print("done!")
+    
+    return
 
+@profile
 def main():
-    xml_string = open("export.xml").read()
-    xml_string = pre_process(xml_string)
-    health_df = xml_to_csv(xml_string)
+    file_path = "export.xml"
+    temp_file_path = preprocess_to_temp_file(file_path)
+    health_df = xml_to_csv(temp_file_path)
     save_to_csv(health_df)
+    remove_temp_file(temp_file_path)
 
     return
 
