@@ -37,7 +37,7 @@ def preprocess_to_temp_file(file_path):
     sys.stdout.flush()
 
     temp_file_path = "temp_preprocessed_export.xml"
-    with open(file_path, 'r') as infile, open(temp_file_path, 'w') as outfile:
+    with open(file_path, 'r', encoding='UTF-8') as infile, open(temp_file_path, 'w', encoding='UTF-8') as outfile:
         skip_dtd = False
         for line in infile:
             if '<!DOCTYPE' in line:
