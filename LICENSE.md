@@ -1,5 +1,5 @@
-Original Code: https://github.com/jameno/Simple-Apple-Health-XML-to-CSV
-Copyright (c) 2025, Jason Meno
+Original Code: https://github.com/jameno/Simple-Apple-Health-XML-to-CSV  
+Copyright (c) 2025, Jason Meno  
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
