@@ -1,3 +1,35 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=jameno&project=Simple-Apple-Health-XML-to-CSV&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
 # Simple Apple Health XML to CSV
 
 A simple script to convert Apple Health's export.xml file to an easy to use csv.
