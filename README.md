@@ -1,4 +1,4 @@
-<img style="float: left; max-height: 200px; padding-bottom: 20px" src="img/logo.png">
+<img style="max-height: 150px; padding-bottom: 20px" src="img/logo.png">
 
 # Simple Apple Health XML to CSV
 
