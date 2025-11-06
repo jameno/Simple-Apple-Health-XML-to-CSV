@@ -1,8 +1,8 @@
+<img style="height: 150px;" src="img/logo.png">
+
 # Simple Apple Health XML to CSV
 
 A simple script to convert Apple Health's export.xml file to an easy to use csv.
-
-
 
 ## How to Run 
 
