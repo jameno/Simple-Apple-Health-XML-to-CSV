@@ -2,39 +2,48 @@
 
 # Simple Apple Health XML to CSV
 
-A small Python script that converts the `export.xml` file from your Apple
+A Python script that converts the `export.xml` file from your Apple
 Health export into a single CSV.
 
-## Get your data out of Apple Health
+## Step 1: Check your Python version
+
+This script requires **Python 3.8 or later**. Verify your version:
+
+```
+python3 --version
+```
+
+If you need to upgrade, download the latest Python from [python.org](https://www.python.org/downloads/).
+
+## Step 2: Export your data from Apple Health
 
 In the iPhone Health app, tap your profile icon → **Export All Health Data**.
-Transfer the resulting `export.zip` to your computer.
+Transfer the resulting `export.zip` to your machine.
 
 | Health home | ➡️ | Export Data |
 |--|--|--|
 | <img src="img/health_home.jpg" width=300> || <img src="img/export_data_button.jpg" width=300> |
 
-## Run the script
+## Step 3: Run the script
 
 ```
 python3 apple_health_xml_convert.py
 ```
 
-With no arguments, it looks for `export.zip`, `apple_health_export/export.xml`,
-or `export.xml` in the current directory and writes
-`apple_health_export_YYYY-MM-DD.csv` next to it.
+With no arguments, it searches the current directory for your export in this order:
+
+1. `export.zip`
+2. `apple_health_export/export.xml`
+3. `export.xml`
+
+The output is written as `apple_health_export_YYYY-MM-DD.csv` next to the input file.
 
 To point at a specific file or change the output path:
 
 ```
-python3 apple_health_xml_convert.py --input ~/Downloads/export.zip
-python3 apple_health_xml_convert.py --output ~/health.csv
-python3 apple_health_xml_convert.py -i path/to/export.zip -o out.csv
+python3 apple_health_xml_convert.py -i export.xml -o out.csv
 ```
 
-The input can be `export.zip`, `export.xml`, or the unzipped
-`apple_health_export/` folder. Python 3.8+ is required; no third-party
-dependencies.
 
 In Excel the output looks something like this:
 
@@ -53,4 +62,4 @@ In Excel the output looks something like this:
 
 ## License
 
-BSD 2-Clause — see [LICENSE.md](LICENSE.md).
+BSD 2-Clause: See [LICENSE.md](LICENSE.md)
