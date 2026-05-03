@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# Apple Health data and converter output
+export.zip
+export.xml
+apple_health_export/
+apple_health_export_*.csv

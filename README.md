@@ -2,54 +2,55 @@
 
 # Simple Apple Health XML to CSV
 
-A simple script to convert Apple Health's export.xml file to an easy to use csv.
+A small Python script that converts the `export.xml` file from your Apple
+Health export into a single CSV.
 
-## How to Run 
+## Get your data out of Apple Health
 
-### 1. Verify you have Python 3 & Pandas installed on your machine or environment
+In the iPhone Health app, tap your profile icon → **Export All Health Data**.
+Transfer the resulting `export.zip` to your computer.
 
-`python --version` should return _Python 3.x.x_ where x is any number. 
-
-If you have Python 2.x.x, please upgrade to Python 3 here: https://www.python.org/downloads/ (or specify your environment's Python version)
-
-`python3 -c "import pandas"` should return blank from the command line
-
-If you get a _**ModuleNotFoundError: No module named 'pandas'**_ error, install pandas and try again:
-
-`pip3 install pandas`
-
-
-### 2. Export your Apple Health Data
-
-| Health Home | ➡️ | Export Data |
+| Health home | ➡️ | Export Data |
 |--|--|--|
-|<img style="float: left;" src="img/health_home.jpg" width=300>||<img style="float: left;" src="img/export_data_button.jpg" width = 300 >|
+| <img src="img/health_home.jpg" width=300> || <img src="img/export_data_button.jpg" width=300> |
 
-Your data will be prepared, and then you can transfer the export.zip file to your machine.
+## Run the script
 
-### 3. Unzip the file, which should contain:
+```
+python3 apple_health_xml_convert.py
+```
 
-   * apple_health_export
-     * export.xml (This is the file with your data that you want to convert)
-     
-     * export_cda.xml
-     
-       
+With no arguments, it looks for `export.zip`, `apple_health_export/export.xml`,
+or `export.xml` in the current directory and writes
+`apple_health_export_YYYY-MM-DD.csv` next to it.
 
-### 4. Place the "apple_health_xml_convert.py" file from this repo into the folder alongside the files and run the script
+To point at a specific file or change the output path:
 
-`python3 apple_health_xml_convert.py`
+```
+python3 apple_health_xml_convert.py --input ~/Downloads/export.zip
+python3 apple_health_xml_convert.py --output ~/health.csv
+python3 apple_health_xml_convert.py -i path/to/export.zip -o out.csv
+```
 
+The input can be `export.zip`, `export.xml`, or the unzipped
+`apple_health_export/` folder. Python 3.8+ is required; no third-party
+dependencies.
 
+In Excel the output looks something like this:
 
-The export will be written with the format:
+<img src="img/example_output.jpg">
 
-* **apple_health_export_YYYY-MM-DD.csv**
+## Notes
 
-  
+- The `HKQuantityTypeIdentifier`, `HKCategoryTypeIdentifier`, and
+  `HKCharacteristicTypeIdentifier` prefixes are stripped from `type` values
+  and column names for legibility.
+- Rows are written in document order (roughly chronological). If you want
+  them sorted by date, sort the CSV with your tool of choice (e.g. `sort` or
+  pandas).
+- Memory stays bounded regardless of export size, so multi-GB exports work
+  on modest hardware.
 
-In Excel, the output should look something like this:
+## License
 
-<img style="float: left;" src="img/example_output.jpg">
-
-Note: This script removes the Apple Health data prefixes: `HKQuantityTypeIdentifier`, `HKCategoryTypeIdentifier`, and `HKCharacteristicTypeIdentifier` for increased legibility. Feel free to comment out those lines in the code with a `#` if you want to keep them in the CSV output.
+BSD 2-Clause — see [LICENSE.md](LICENSE.md).
